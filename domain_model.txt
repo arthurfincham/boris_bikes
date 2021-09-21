@@ -1,0 +1,24 @@
+You must translate these two user stories into a functional representation:
+
+As a person,
+So that I can use a bike,
+I'd like a docking station to release a bike.
+
+As a person,
+So that I can use a good bike,
+I'd like to see if a bike is working
+
+Nouns
+person
+Bike
+Docking station
+
+Verbs
+Use
+Release
+Working
+
+Objects         	Messages
+person            request_a_bike    use
+docking_station   release_a_bike    check_bike_working? 
+bike	            get_released      working?
