@@ -15,4 +15,9 @@ describe DockingStation do
     expect(checker.release_bike.working?).to eq true
   end
 
+  it 'allows a bike to be docked' do
+    dock_length = checker.docked_bikes.length
+    expect(checker.dock_a_bike(Bike.new)).to change(checker.docked_bikes, :hello).from(dock_length).to(dock_length + 1)
+  end
+
 end
