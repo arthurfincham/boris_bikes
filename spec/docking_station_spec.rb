@@ -1,4 +1,4 @@
-require 'sourcecode'
+require 'docking_station'
 
 checker = DockingStation.new
 
