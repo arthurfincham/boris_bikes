@@ -52,4 +52,19 @@ describe DockingStation do
     expect(checker.capacity).to eq 20
   end
 
+  it 'returns that the bike is broken when user says is broken' do
+    bike = Bike.new
+    expect(bike.broken).to eq false
+  end
+
+  it 'does not release a broken bike' do
+    bike = Bike.new
+    bike.broken
+    station.dock_a_bike(bike)
+    checker = DockingStation.new
+    expect { checker.dock_a_bike(bike) }.to raise_error("There are no available bikes")
+  end
+
+
+
 end
