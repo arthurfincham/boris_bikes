@@ -15,5 +15,9 @@ class DockingStation
   def dock_a_bike(docking_bike)
     @docked_bikes << docking_bike
   end
-  
+
+  def are_there_bikes
+    !@docked_bikes.empty?
+  end
+
 end
