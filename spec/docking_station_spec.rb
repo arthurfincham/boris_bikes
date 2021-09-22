@@ -16,23 +16,31 @@ describe DockingStation do
   end
 
   it 'does not release a bike if none are available' do
-    expect { checker.release_bike }.to raise_error
+    expect { checker.release_bike }.to raise_error("There are no bikes")
   end
 
   # INCLUDES Bike.new 
 
   it 'allows a bike to be docked' do
     bike = Bike.new
+    checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect(checker.docked_bikes).to include(bike)
   end
 
   it 'shows that there are bikes docked' do
     bike = Bike.new
+    checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect(checker.are_there_bikes).to eq true
   end
 
-  
+  it 'does not dock a bike if more than 1 bike is docked' do
+    bike = Bike.new
+    bike2 = Bike.new
+    checker = DockingStation.new
+    checker.dock_a_bike(bike)
+    expect { checker.dock_a_bike(bike2) }.to raise_error("Dock is at max capacity")
+  end
 
 end
