@@ -12,13 +12,15 @@ class DockingStation
     if @docked_bikes.empty?
       raise StandardError.new "There are no bikes"
     end
+    
   end
   
   def dock_a_bike(docking_bike)
-    unless @docked_bikes.empty?
+    if @docked_bikes.length >= 20
       raise StandardError.new "Dock is at max capacity"
+    else
+      @docked_bikes << docking_bike
     end
-    @docked_bikes << docking_bike
   end
 
   def are_there_bikes

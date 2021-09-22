@@ -3,6 +3,7 @@ require 'docking_station'
 checker = DockingStation.new
 
 describe DockingStation do
+
   it 'instances respond to release_bike' do
     expect(checker).to respond_to(:release_bike)
   end
@@ -35,12 +36,10 @@ describe DockingStation do
     expect(checker.are_there_bikes).to eq true
   end
 
-  it 'does not dock a bike if more than 1 bike is docked' do
-    bike = Bike.new
-    bike2 = Bike.new
+  it 'does not dock a bike if more than 20 bikes are docked' do
     checker = DockingStation.new
-    checker.dock_a_bike(bike)
-    expect { checker.dock_a_bike(bike2) }.to raise_error("Dock is at max capacity")
+    20.times { checker.dock_a_bike Bike.new }
+    expect { checker.dock_a_bike(Bike.new) }.to raise_error("Dock is at max capacity")
   end
 
 end
