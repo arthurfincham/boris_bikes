@@ -9,7 +9,9 @@ class DockingStation
   end
   
   def release_bike
-    bike = Bike.new
+    if @docked_bikes.empty?
+      raise StandardError.new "This is an exception"
+    end
   end
   
   def dock_a_bike(docking_bike)

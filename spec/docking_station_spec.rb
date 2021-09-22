@@ -15,6 +15,12 @@ describe DockingStation do
     expect(checker.release_bike.working?).to eq true
   end
 
+  it 'does not release a bike if none are available' do
+    expect { checker.release_bike }.to raise_error
+  end
+
+  # INCLUDES Bike.new 
+
   it 'allows a bike to be docked' do
     bike = Bike.new
     checker.dock_a_bike(bike)
@@ -26,5 +32,7 @@ describe DockingStation do
     checker.dock_a_bike(bike)
     expect(checker.are_there_bikes).to eq true
   end
+
+  
 
 end
