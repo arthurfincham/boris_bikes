@@ -58,9 +58,7 @@ describe DockingStation do
   end
 
   it 'does not release a broken bike' do
-    bike = Bike.new
-    bike.broken
-    station.dock_a_bike(bike)
+    bike = Bike.new.broken
     checker = DockingStation.new
     expect { checker.dock_a_bike(bike) }.to raise_error("There are no available bikes")
   end
