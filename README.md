@@ -5,6 +5,8 @@
 ![](https://img.shields.io/github/last-commit/arthurfincham/classnotesv2)
 ![](https://img.shields.io/github/languages/count/arthurfincham/classnotesv2)
 ![](https://img.shields.io/github/languages/code-size/arthurfincham/classnotesv2)
+[![Ruby](https://badgen.net/badge/icon/ruby?icon=ruby&label)](https://https://ruby-lang.org/)
+
 
 </div>
 
