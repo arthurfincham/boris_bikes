@@ -38,7 +38,7 @@ describe DockingStation do
 
   it 'does not dock a bike if more than 20 bikes are docked' do
     checker = DockingStation.new
-    20.times { checker.dock_a_bike Bike.new }
+    DockingStation::DEFAULT_CAPACITY.times { checker.dock_a_bike Bike.new }
     expect { checker.dock_a_bike(Bike.new) }.to raise_error("Dock is at max capacity")
   end
 
