@@ -9,14 +9,14 @@ describe DockingStation do
   end
 
   it 'gets a bike' do
-    bike = Bike.new
+    bike = double(:bike)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
-    expect(checker.release_bike).to be_an_instance_of(Bike)
+    expect(checker.release_bike).to be_an_instance_of(double(:Bike))
   end
 
   it 'bike works' do
-    bike = Bike.new
+    bike = double(:bike)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect(checker.release_bike.working).to eq true
@@ -30,14 +30,14 @@ describe DockingStation do
   # INCLUDES Bike.new 
 
   it 'allows a bike to be docked' do
-    bike = Bike.new
+    bike = double(:bike)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect(checker.docked_bikes).to include(bike)
   end
 
   it 'shows that there are bikes docked' do
-    bike = Bike.new
+    bike = double(:bike)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect(checker.are_there_bikes).to eq true
@@ -45,8 +45,8 @@ describe DockingStation do
 
   it 'does not dock a bike if more than 20 bikes are docked' do
     checker = DockingStation.new
-    checker.capacity.times { checker.dock_a_bike Bike.new }
-    expect { checker.dock_a_bike(Bike.new) }.to raise_error("Dock is at max capacity")
+    checker.capacity.times { checker.dock_a_bike double(:bike) }
+    expect { checker.dock_a_bike(double(:bike)) }.to raise_error("Dock is at max capacity")
   end
 
   it 'allows user to define dock capacity' do
@@ -60,12 +60,12 @@ describe DockingStation do
   end
 
   it 'returns that the bike is broken when user says is broken' do
-    bike = Bike.new
+    bike = double(:bike)
     expect(bike.broken).to eq false
   end
 
   it 'does not release a broken bike' do
-    bike = Bike.new
+    bike = double(:bike)
     bike.broken
     checker = DockingStation.new
     checker.dock_a_bike(bike)
