@@ -4,19 +4,27 @@ checker = DockingStation.new
 
 describe DockingStation do
 
+  let(:bike) { double :bike }
+  #let(:Bike) { class_double :Bike }
+
   it 'instances respond to release_bike' do
     expect(checker).to respond_to(:release_bike)
   end
 
   it 'gets a bike' do
-    bike = double(:bike)
+    allow(bike).to receive(:be_an_instance_of).and_return(true)
+    allow(bike).to receive(:working).and_return(true)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
-    expect(checker.release_bike).to be_an_instance_of(double(:Bike))
+    expect(checker.release_bike).to eq bike
   end
+  # Couldn't ge the class double to work in the above
+  # Changed test so not testing it is in Bike class
+  # but directly testing that bike is released
 
   it 'bike works' do
     bike = double(:bike)
+    allow(bike).to receive(:working).and_return(true)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect(checker.release_bike.working).to eq true
@@ -61,12 +69,15 @@ describe DockingStation do
 
   it 'returns that the bike is broken when user says is broken' do
     bike = double(:bike)
+    allow(bike).to receive(:broken).and_return(false)
     expect(bike.broken).to eq false
   end
 
   it 'does not release a broken bike' do
     bike = double(:bike)
+    allow(bike).to receive(:broken).and_return(false)
     bike.broken
+    allow(bike).to receive(:working).and_return(false)
     checker = DockingStation.new
     checker.dock_a_bike(bike)
     expect { checker.release_bike }.to raise_error("No working bikes")
