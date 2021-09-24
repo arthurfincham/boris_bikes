@@ -10,4 +10,8 @@ class Bike
     @working = false
   end
 
+  private
+  def thing
+  end
+
 end

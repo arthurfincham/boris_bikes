@@ -9,15 +9,22 @@ describe DockingStation do
   end
 
   it 'gets a bike' do
+    bike = Bike.new
+    checker = DockingStation.new
+    checker.dock_a_bike(bike)
     expect(checker.release_bike).to be_an_instance_of(Bike)
   end
 
   it 'bike works' do
-    expect(checker.release_bike.working?).to eq true
+    bike = Bike.new
+    checker = DockingStation.new
+    checker.dock_a_bike(bike)
+    expect(checker.release_bike.working).to eq true
   end
 
   it 'does not release a bike if none are available' do
-    expect { checker.release_bike }.to raise_error("There are no bikes")
+    checker = DockingStation.new
+    expect { checker.release_bike }.to raise_error("No bikes at all")
   end
 
   # INCLUDES Bike.new 
@@ -58,9 +65,11 @@ describe DockingStation do
   end
 
   it 'does not release a broken bike' do
-    bike = Bike.new.broken
+    bike = Bike.new
+    bike.broken
     checker = DockingStation.new
-    expect { checker.dock_a_bike(bike) }.to raise_error("There are no available bikes")
+    checker.dock_a_bike(bike)
+    expect { checker.release_bike }.to raise_error("No working bikes")
   end
 
 
