@@ -1,4 +1,5 @@
 require './lib/bike'
+require './lib/docking_station'
 
 class Van
 
@@ -20,19 +21,47 @@ class Van
   end
 
   def collect_broken_bikes(docking_station)
-  # Loop do
-  #   is there capacity for more bikes in the van
-  #   ask whether there is a broken bike in the dockingstation
-  #   remove the first broken bike from the dock
-  #   put the bike in the van
+    loop do
+      raise StandardError.new "Van is at capacity" if full?
+      if docking_station.contains_broken_bike?
+        dock_a_bike(docking_station.release_broken_bike)
+      else
+        break
+      end
+    end
+  end
+
+  def collect_broken_bikes(docking_station)
+    loop do
+      raise StandardError.new "Van is at capacity" if full?
+      if docking_station.contains_broken_bike?
+        dock_a_bike(docking_station.release_broken_bike)
+      else
+        break
+      end
+    end
   end
 
   def deliver_broken_bikes(garage)
-    # loop do
-    #   ask whether there is a broken bike in the van
-    #   ask whether there is space in the garage for the bike
-    #   remove bike from van
-    #   put bike in garage
+    loop do
+      if !empty? && !garage.full?
+        released_bike = @docked_bikes.pop
+        garage.dock_a_bike(released_bike)
+      else
+        break
+      end
+    end
+  end
+
+  def collect_working_bikes(garage)
+    loop do
+      raise StandardError.new "Van is at capacity" if full?
+      if !garage.empty?
+        dock_a_bike(garage.release_bike)
+      else
+        break
+      end
+    end
   end
 
   private

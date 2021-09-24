@@ -30,6 +30,27 @@ class DockingStation
     response
   end
 
+  def contains_broken_bike?
+    response = false
+    @docked_bikes.each do |x|
+      if x.working == false
+        response = true
+      end
+    end
+    response
+  end
+
+  def find_first_broken_bike
+    @docked_bikes.index { |x| x.working == false }
+  end
+
+  def release_broken_bike
+    released_bike = @docked_bikes[find_first_broken_bike]
+    @docked_bikes.delete_at(find_first_broken_bike)
+    released_bike
+  end
+
+
   def find_first_working_bike
     @docked_bikes.index { |x| x.working == true}
   end
